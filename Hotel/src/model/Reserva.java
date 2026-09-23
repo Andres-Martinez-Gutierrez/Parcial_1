@@ -9,7 +9,7 @@ public class Reserva {
     private String fechaEntrada;
     private String fechaSalida;
     private String estado;
-    private List<String> metodosPago;
+    private String metodoPago;
     private double valorTotal;
 
     // Relación con Huesped
@@ -31,13 +31,13 @@ public class Reserva {
      * @param valorTotal de la Reserva
      * @param huesped de la Reserva
      */
-    public Reserva(int codigoReserva, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, Double valorTotal, Huesped huesped) {
+    public Reserva(int codigoReserva, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, Double valorTotal, Huesped huesped, String metodoPago) {
         this.codigoReserva = codigoReserva;
         this.fechaRealizacion = fechaRealizacion;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
         this.estado = estado;
-        this.metodosPago = new ArrayList<>();
+        this.metodoPago = metodoPago;
         this.valorTotal = valorTotal;
         this.huesped = huesped;
         this.habitaciones = new ArrayList<>();
@@ -84,12 +84,12 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public List<String> getMetodosPago() {
-        return metodosPago;
+    public String getMetodoPago() {
+        return metodoPago;
     }
 
-    public void setMetodosPago(List<String> metodosPago) {
-        this.metodosPago = metodosPago;
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
     }
 
     public Double getValorTotal() {
@@ -132,7 +132,7 @@ public class Reserva {
                 ", fechaEntrada='" + fechaEntrada + '\'' +
                 ", fechaSalida='" + fechaSalida + '\'' +
                 ", estado='" + estado + '\'' +
-                ", metodosPago=" + metodosPago +
+                ", metodoPago=" + metodoPago +
                 ", valorTotal=" + valorTotal +
                 ", huesped=" + huesped +
                 ", habitaciones=" + habitaciones +
