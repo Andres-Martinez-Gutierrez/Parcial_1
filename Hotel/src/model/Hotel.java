@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hotel {
@@ -15,16 +16,24 @@ public class Hotel {
     private List<Reserva> reservas;
     private List<ServicioAdicional> serviciosAdicionales;
 
-    public Hotel(String nombreComercial, int nit, String direccion, String telefono, String paginaWeb, List<Huesped> huespedes, List<Habitacion> habitaciones, List<Reserva> reservas, List<ServicioAdicional> serviciosAdicionales) {
+    /**
+     * Constructor de la clase Hotel
+     * @param nombreComercial      del hotel
+     * @param nit                  del hotel
+     * @param direccion            del hotel
+     * @param telefono             del hotel
+     * @param paginaWeb            del hotel
+     */
+    public Hotel(String nombreComercial, int nit, String direccion, String telefono, String paginaWeb) {
         this.nombreComercial = nombreComercial;
         this.nit = nit;
         this.direccion = direccion;
         this.telefono = telefono;
         this.paginaWeb = paginaWeb;
-        this.huespedes = huespedes;
-        this.habitaciones = habitaciones;
-        this.reservas = reservas;
-        this.serviciosAdicionales = serviciosAdicionales;
+        this.huespedes = new ArrayList<>();
+        this.habitaciones = new ArrayList<>();
+        this.reservas = new ArrayList<>();
+        this.serviciosAdicionales = new ArrayList<>();
     }
 
     public String getNombreComercial() {

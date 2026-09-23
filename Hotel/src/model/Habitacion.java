@@ -8,6 +8,15 @@ public class Habitacion {
     private double precioPorNoche;
     private String estado;
 
+    /**
+     * Constructor de la clase Habitacion
+     * @param numero de la Habitacion
+     * @param piso de la Habitacion
+     * @param tipo de la Habitacion
+     * @param capacidad de la Habitacion
+     * @param precioPorNoche de la Habitacion
+     * @param estado de la Habitacion
+     */
     public Habitacion(int numero, int piso, String tipo, int capacidad, double precioPorNoche, String estado) {
         this.numero = numero;
         this.piso = piso;

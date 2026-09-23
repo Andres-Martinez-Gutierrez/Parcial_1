@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Huesped {
@@ -12,11 +13,19 @@ public class Huesped {
     // Relación: un huésped puede tener múltiples reservas
     private List<Reserva> reservas;
 
-    public Huesped(String nombreCompleto, int documentoIdentidad, String telefono, List<Reserva> reservas, String paisProcedencia, String correoElectronico) {
+    /**
+     * Constructor de la clase Huesped
+     * @param nombreCompleto del Huesped
+     * @param documentoIdentidad del Huesped
+     * @param telefono del Huesped
+     * @param paisProcedencia del Huesped
+     * @param correoElectronico del Huesped
+     */
+    public Huesped(String nombreCompleto, int documentoIdentidad, String telefono, String paisProcedencia, String correoElectronico) {
         this.nombreCompleto = nombreCompleto;
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
-        this.reservas = reservas;
+        this.reservas = new ArrayList<>();
         this.paisProcedencia = paisProcedencia;
         this.correoElectronico = correoElectronico;
     }
