@@ -2,10 +2,18 @@ import model.*;
 
 import javax.swing.*;
 
+/**
+ * Clase principal que gestiona la interfaz de usuario mediante JOptionPane
+ * y coordina las operaciones del sistema hotelero StayPlus.
+ */
 public class Main {
 
     static Hotel hotel;
 
+    /**
+     * Punto de entrada principal de la aplicación.
+     * Inicializa la instancia del hotel, carga los datos de prueba y gestiona el ciclo del menú.
+     */
     public static void main(String[] args) {
         hotel = new Hotel(
                 "StayPlus",
@@ -14,6 +22,7 @@ public class Main {
                 "6067583068",
                 "www.stayplus.co"
         );
+
         int opcionPrincipal = 0;
         while (opcionPrincipal != 8) {
             try {
@@ -37,6 +46,11 @@ public class Main {
         }
     }
 
+    /**
+     * Despliega la ventana emergente con el menú principal de opciones del sistema.
+     *
+     * @return Cadena con la opción elegida por el usuario o null si se cancela la ventana.
+     */
     private static String opcionesMenu() {
         return JOptionPane.showInputDialog(null, """
                 ========== MENÚ PRINCIPAL ==========
@@ -66,7 +80,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, "✓ Huésped " + nombre + " registrado exitosamente.");
     }
 
-    // 2. Buscar huésped por teléfono
+    /**
+     * Solicita un número de teléfono y busca la información del huésped registrado asociado.
+     */
     private static void buscarHuesped() {
         String telefono = JOptionPane.showInputDialog(null, "Ingrese el número de teléfono del huésped:");
         if (telefono == null || telefono.isEmpty()) return;
@@ -75,7 +91,9 @@ public class Main {
         else JOptionPane.showMessageDialog(null, "✗ No existe un huésped con el teléfono: " + telefono);
     }
 
-    // 3. Registrar reserva
+    /**
+     * Recopila los datos de una reserva y la vincula con un huésped previamente existente.
+     */
     private static void registrarReserva() {
         if (hotel.getHuespedes().isEmpty()) {
             JOptionPane.showMessageDialog(null, "✗ No hay huéspedes registrados.\nPrimero debe registrar un huésped.");
@@ -107,7 +125,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, "✓ Reserva creada exitosamente.\n\nCódigo: " + codigo + "\nEstado: Pendiente");
     }
 
-    // 4. Gestionar reserva
+    /**
+     * Muestra el submenú que permite modificar, calcular o consultar el estado de una reserva.
+     */
     private static void gestionarReserva() {
         if (hotel.getReservas().isEmpty()) {
             JOptionPane.showMessageDialog(null, "✗ No hay reservas registradas.");
@@ -132,7 +152,9 @@ public class Main {
         }
     }
 
-    // 4.1 Agregar habitación
+    /**
+     * Asigna una habitación disponible registrada en el hotel a la reserva seleccionada.
+     */
     private static void agregarHabitacionAReserva() {
         Reserva reserva = seleccionarReserva();
         if (reserva == null) return;
@@ -155,7 +177,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, agregada ? "✓ Habitación agregada a la reserva." : "✗ No fue posible agregarla. Verifique que esté disponible y no repetida.");
     }
 
-    // 4.2 Agregar servicio
+    /**
+     * Asigna un servicio adicional disponible de la lista del hotel a la reserva seleccionada.
+     */
     private static void agregarServicioAReserva() {
         Reserva reserva = seleccionarReserva();
         if (reserva == null) return;
@@ -178,7 +202,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, agregado ? "✓ Servicio agregado a la reserva." : "✗ No fue posible agregar el servicio. Verifique que esté disponible.");
     }
 
-    // 4.3 Calcular valor total
+    /**
+     * Invoca el cálculo del costo total de una reserva según sus noches de estadía y servicios.
+     */
     private static void calcularTotalReserva() {
         Reserva reserva = seleccionarReserva();
         if (reserva == null) return;
@@ -190,7 +216,9 @@ public class Main {
         }
     }
 
-    // 4.4 Actualizar estado
+    /**
+     * Actualiza el estado actual de la reserva seleccionada.
+     */
     private static void actualizarEstadoReserva() {
         Reserva reserva = seleccionarReserva();
         if (reserva == null) return;
@@ -210,7 +238,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, actualizado ? "✓ Estado actualizado.\nNuevo estado: " + estado : "✗ No se pudo actualizar.");
     }
 
-    // 5. Registrar habitación
+    /**
+     * Solicita los atributos requeridos y registra una nueva habitación en el hotel.
+     */
     private static void registrarHabitacion() {
         int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número de habitación:"));
         int piso = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el piso:"));
@@ -229,7 +259,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, "✓ Habitación " + numero + " registrada exitosamente.");
     }
 
-    // 6. Registrar servicio
+    /**
+     * Solicita los atributos requeridos y registra un nuevo servicio adicional en el hotel.
+     */
     private static void registrarServicio() {
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el código del servicio:"));
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del servicio:");
@@ -240,7 +272,9 @@ public class Main {
         JOptionPane.showMessageDialog(null, "✓ Servicio '" + nombre + "' registrado exitosamente.");
     }
 
-    // 7. Consultar ingresos por fecha
+    /**
+     * Consulta y despliega la suma de los ingresos acumulados para las reservas en una fecha dada.
+     */
     private static void consultarIngresos() {
         String fecha = JOptionPane.showInputDialog(null, "Ingrese la fecha de realización (dd/MM/yyyy):");
         if (fecha == null || fecha.isEmpty()) return;
@@ -248,6 +282,11 @@ public class Main {
         JOptionPane.showMessageDialog(null, "════════════════════════════════\nINGRESOS POR FECHA\n════════════════════════════════\n\nFecha: " + fecha + "\nIngresos: $" + ingresos);
     }
 
+    /**
+     * Muestra las reservas registradas y retorna el objeto {@link Reserva} seleccionado según su código.
+     *
+     * @return La reserva hallada o null si no existe.
+     */
     private static Reserva seleccionarReserva() {
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, obtenerListaReservas() + "\nIngrese el código de la reserva:"));
         for (Reserva r : hotel.getReservas()) if (r.getCodigoReserva() == codigo) return r;
@@ -255,6 +294,11 @@ public class Main {
         return null;
     }
 
+    /**
+     * Construye un listado descriptivo con los códigos y estados de las reservas registradas.
+     *
+     * @return Cadena formateada para su visualización.
+     */
     private static String obtenerListaReservas() {
         StringBuilder lista = new StringBuilder("RESERVAS REGISTRADAS\n====================\n");
         for (Reserva r : hotel.getReservas())
@@ -262,12 +306,22 @@ public class Main {
         return lista.toString();
     }
 
+    /**
+     * Construye un listado descriptivo con los teléfonos de los huéspedes registrados.
+     *
+     * @return Cadena formateada para su visualización.
+     */
     private static String obtenerListaHuespedes() {
         StringBuilder lista = new StringBuilder("HUÉSPEDES REGISTRADOS\n=====================\n");
         for (Huesped h : hotel.getHuespedes()) lista.append("- ").append(h.getTelefono()).append("\n");
         return lista.toString();
     }
 
+    /**
+     * Construye un listado descriptivo con los códigos y nombres de los servicios registrados.
+     *
+     * @return Cadena formateada para su visualización.
+     */
     private static String obtenerListaServicios() {
         StringBuilder lista = new StringBuilder("SERVICIOS REGISTRADOS\n=====================\n");
         for (ServicioAdicional s : hotel.getServiciosAdicionales())
