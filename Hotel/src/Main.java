@@ -2,10 +2,7 @@ import model.*;
 
 import javax.swing.*;
 
-/**
- * Clase principal que gestiona la interfaz de usuario mediante JOptionPane
- * y coordina las operaciones del sistema hotelero StayPlus.
- */
+
 public class Main {
 
     static Hotel hotel;
