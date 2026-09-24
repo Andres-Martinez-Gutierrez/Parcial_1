@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Hotel {
     private String nombreComercial;
-    private int nit;
+    private String  nit;
     private String direccion;
     private String telefono;
     private String paginaWeb;
@@ -25,7 +25,7 @@ public class Hotel {
      * @param telefono teléfono del hotel
      * @param paginaWeb página web del hotel
      */
-    public Hotel(String nombreComercial, int nit, String direccion, String telefono, String paginaWeb) {
+    public Hotel(String nombreComercial, String nit, String direccion, String telefono, String paginaWeb) {
         this.nombreComercial = nombreComercial;
         this.nit = nit;
         this.direccion = direccion;
@@ -107,11 +107,11 @@ public class Hotel {
         this.nombreComercial = nombreComercial;
     }
 
-    public int getNit() {
+    public String getNit() {
         return nit;
     }
 
-    public void setNit(int nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
 
