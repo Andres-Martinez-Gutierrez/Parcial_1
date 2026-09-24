@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Huesped {
     private String nombreCompleto;
-    private int documentoIdentidad;
+    private String documentoIdentidad;
     private String telefono;
     private String correoElectronico;
     private String paisProcedencia;
@@ -21,7 +21,7 @@ public class Huesped {
      * @param paisProcedencia del Huesped
      * @param correoElectronico del Huesped
      */
-    public Huesped(String nombreCompleto, int documentoIdentidad, String telefono, String paisProcedencia, String correoElectronico) {
+    public Huesped(String nombreCompleto, String documentoIdentidad, String telefono, String paisProcedencia, String correoElectronico) {
         this.nombreCompleto = nombreCompleto;
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
@@ -38,11 +38,11 @@ public class Huesped {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public int getDocumentoIdentidad() {
+    public String getDocumentoIdentidad() {
         return documentoIdentidad;
     }
 
-    public void setDocumentoIdentidad(int documentoIdentidad) {
+    public void setDocumentoIdentidad(String documentoIdentidad) {
         this.documentoIdentidad = documentoIdentidad;
     }
 

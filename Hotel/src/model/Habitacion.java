@@ -17,7 +17,8 @@ public class Habitacion {
      * @param precioPorNoche de la Habitacion
      * @param estado de la Habitacion
      */
-    public Habitacion(int numero, int piso, String tipo, int capacidad, double precioPorNoche, String estado) {
+    public Habitacion(int numero, int piso, String tipo, int capacidad,
+                      double precioPorNoche, String estado) {
         this.numero = numero;
         this.piso = piso;
         this.tipo = tipo;
