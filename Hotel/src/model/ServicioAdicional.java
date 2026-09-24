@@ -5,17 +5,9 @@ public class ServicioAdicional {
     private String nombre;
     private String descripcion;
     private double precio;
-    private Boolean disponible;
+    private boolean disponible; // Cambiado de Boolean a boolean
 
-    /**
-     * Constructor de la clase ServicioAdicional
-     * @param codigo del servicio adicional
-     * @param nombre del servicio adicional
-     * @param precio del servicio adicional
-     * @param descripcion del servicio adicional
-     * @param disponible del servicio adicional
-     */
-    public ServicioAdicional(int codigo, String nombre, double precio, String descripcion, Boolean disponible) {
+    public ServicioAdicional(int codigo, String nombre, double precio, String descripcion, boolean disponible) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
@@ -55,11 +47,12 @@ public class ServicioAdicional {
         this.precio = precio;
     }
 
-    public Boolean getDisponible() {
+    // Nombre ajustado para que coincida con Reserva
+    public boolean isDisponible() {
         return disponible;
     }
 
-    public void setDisponible(Boolean disponible) {
+    public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
 
