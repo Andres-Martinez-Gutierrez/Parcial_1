@@ -17,12 +17,13 @@ public class Hotel {
     private List<ServicioAdicional> serviciosAdicionales;
 
     /**
-     * Constructor de la clase Hotel
-     * @param nombreComercial      del hotel
-     * @param nit                  del hotel
-     * @param direccion            del hotel
-     * @param telefono             del hotel
-     * @param paginaWeb            del hotel
+     * Constructor de la clase Hotel.
+     *
+     * @param nombreComercial nombre comercial del hotel
+     * @param nit NIT del hotel
+     * @param direccion dirección del hotel
+     * @param telefono teléfono del hotel
+     * @param paginaWeb página web del hotel
      */
     public Hotel(String nombreComercial, int nit, String direccion, String telefono, String paginaWeb) {
         this.nombreComercial = nombreComercial;
@@ -34,6 +35,68 @@ public class Hotel {
         this.habitaciones = new ArrayList<>();
         this.reservas = new ArrayList<>();
         this.serviciosAdicionales = new ArrayList<>();
+    }
+
+    /**
+     * Busca un huésped utilizando su número de teléfono.
+     * Recorre la lista de huéspedes y compara el teléfono recibido
+     * con el teléfono registrado de cada huésped.
+     *
+     * @param telefono número de teléfono que se desea buscar
+     * @return el huésped encontrado o null si no existe
+     */
+    public Huesped buscarHuespedPorTelefono(String telefono) {
+        for (Huesped huesped : huespedes) {
+            if (huesped.getTelefono().equals(telefono)) {
+                return huesped;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Determina si un número es perfecto.
+     * Un número perfecto es igual a la suma de sus divisores propios,
+     * sin incluir el mismo número.
+     *
+     * @param numero número que se desea comprobar
+     * @return true si el número es perfecto, false en caso contrario
+     */
+    public boolean esNumeroPerfecto(int numero) {
+        if (numero <= 1) {
+            return false;
+        }
+
+        int suma = 0;
+
+        for (int i = 1; i <= numero / 2; i++) {
+            if (numero % i == 0) {
+                suma += i;
+            }
+        }
+
+        return suma == numero;
+    }
+
+    /**
+     * Calcula los ingresos correspondientes a las reservas realizadas
+     * en una fecha determinada.
+     * Recorre las reservas, compara la fecha de realización y acumula
+     * el valor total de las reservas que coincidan.
+     *
+     * @param fecha fecha que se desea consultar
+     * @return valor total acumulado de las reservas de esa fecha
+     */
+    public double calcularIngresosPorFecha(String fecha) {
+        double total = 0;
+
+        for (Reserva reserva : reservas) {
+            if (reserva.getFechaRealizacion().equals(fecha)) {
+                total += reserva.getValorTotal();
+            }
+        }
+
+        return total;
     }
 
     public String getNombreComercial() {
