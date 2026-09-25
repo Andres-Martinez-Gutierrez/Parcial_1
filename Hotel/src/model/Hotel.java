@@ -5,16 +5,15 @@ import java.util.List;
 
 public class Hotel {
     private String nombreComercial;
-    private String  nit;
+    private String nit;
     private String direccion;
     private String telefono;
     private String paginaWeb;
 
     // El hotel administra estos registros
-    private List<Huesped> huespedes;
-    private List<Habitacion> habitaciones;
-    private List<Reserva> reservas;
-    private List<ServicioAdicional> serviciosAdicionales;
+    private List<Huesped> listaHuespedHotel;
+    private List<Habitacion> listaHabitacionHotel;
+    private List<Reserva> listaReservaHotel;
 
     /**
      * Constructor de la clase Hotel.
@@ -31,10 +30,9 @@ public class Hotel {
         this.direccion = direccion;
         this.telefono = telefono;
         this.paginaWeb = paginaWeb;
-        this.huespedes = new ArrayList<>();
-        this.habitaciones = new ArrayList<>();
-        this.reservas = new ArrayList<>();
-        this.serviciosAdicionales = new ArrayList<>();
+        this.listaHuespedHotel = new ArrayList<>();
+        this.listaHabitacionHotel = new ArrayList<>();
+        this.listaReservaHotel = new ArrayList<>();
     }
 
     /**
@@ -98,7 +96,7 @@ public class Hotel {
     public double calcularIngresosPorFecha(String fecha) {
         double total = 0;
 
-        for (Reserva reserva : reservas) {
+        for (Reserva reserva : listaReservaHotel) {
             if (reserva.getFechaRealizacion().equals(fecha)) {
                 total += reserva.getValorTotal();
             }
@@ -147,37 +145,30 @@ public class Hotel {
         this.paginaWeb = paginaWeb;
     }
 
-    public List<Huesped> getHuespedes() {
-        return huespedes;
+    public List<Huesped> getListaHuespedHotel() {
+        return listaHuespedHotel;
     }
 
-    public void setHuespedes(List<Huesped> huespedes) {
-        this.huespedes = huespedes;
+    public void setListaHuespedHotel(List<Huesped> listaHuespedHotel) {
+        this.listaHuespedHotel = listaHuespedHotel;
     }
 
-    public List<Habitacion> getHabitaciones() {
-        return habitaciones;
+    public List<Habitacion> getListaHabitacionHotel() {
+        return listaHabitacionHotel;
     }
 
-    public void setHabitaciones(List<Habitacion> habitaciones) {
-        this.habitaciones = habitaciones;
+    public void setListaHabitacionHotel(List<Habitacion> listaHabitacionHotel) {
+        this.listaHabitacionHotel = listaHabitacionHotel;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
+    public List<Reserva> getListaReservaHotel() {
+        return listaReservaHotel;
     }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
+    public void setListaReservaHotel(List<Reserva> listaReservaHotel) {
+        this.listaReservaHotel = listaReservaHotel;
     }
 
-    public List<ServicioAdicional> getServiciosAdicionales() {
-        return serviciosAdicionales;
-    }
-
-    public void setServiciosAdicionales(List<ServicioAdicional> serviciosAdicionales) {
-        this.serviciosAdicionales = serviciosAdicionales;
-    }
 
     @Override
     public String toString() {
@@ -187,10 +178,9 @@ public class Hotel {
                 ", direccion='" + direccion + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", paginaWeb='" + paginaWeb + '\'' +
-                ", huespedes=" + huespedes +
-                ", habitaciones=" + habitaciones +
-                ", reservas=" + reservas +
-                ", serviciosAdicionales=" + serviciosAdicionales +
+                ", huespedes=" + listaHuespedHotel +
+                ", habitaciones=" + listaHabitacionHotel +
+                ", reservas=" + listaReservaHotel +
                 '}';
     }
 }

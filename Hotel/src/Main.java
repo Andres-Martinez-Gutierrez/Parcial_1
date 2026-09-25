@@ -2,10 +2,7 @@ import model.*;
 
 import javax.swing.*;
 
-/**
- * Clase principal que gestiona la interfaz de usuario mediante JOptionPane
- * y coordina las operaciones del sistema hotelero StayPlus.
- */
+
 public class Main {
 
     static Hotel hotel;
@@ -26,8 +23,8 @@ public class Main {
         int opcionPrincipal = 0;
         while (opcionPrincipal != 8) {
             try {
-                String entrada = opcionesMenu();
-                if (entrada == null) {
+                String entrada = opcionesMenuPrincipal();
+                if (entrada == null){
                     break;
                 }
                 opcionPrincipal = Integer.parseInt(entrada);
@@ -51,7 +48,7 @@ public class Main {
      *
      * @return Cadena con la opción elegida por el usuario o null si se cancela la ventana.
      */
-    private static String opcionesMenu() {
+    private static String opcionesMenuPrincipal() {
         return JOptionPane.showInputDialog(null, """
                 ========== MENÚ PRINCIPAL ==========
                 1. Registrar huésped
@@ -95,7 +92,7 @@ public class Main {
      * Recopila los datos de una reserva y la vincula con un huésped previamente existente.
      */
     private static void registrarReserva() {
-        if (hotel.getHuespedes().isEmpty()) {
+        if (hotel.getListaHuespedHotel().isEmpty()) {
             JOptionPane.showMessageDialog(null, "✗ No hay huéspedes registrados.\nPrimero debe registrar un huésped.");
             return;
         }
@@ -121,7 +118,7 @@ public class Main {
         }
 
         Reserva reserva = new Reserva(codigo, fechaRealizacion, fechaEntrada, fechaSalida, "Pendiente", 0.0, huesped, metodoPago);
-        hotel.getReservas().add(reserva);
+        hotel.getListaReservaHotel().add(reserva);
         JOptionPane.showMessageDialog(null, "✓ Reserva creada exitosamente.\n\nCódigo: " + codigo + "\nEstado: Pendiente");
     }
 
@@ -129,7 +126,7 @@ public class Main {
      * Muestra el submenú que permite modificar, calcular o consultar el estado de una reserva.
      */
     private static void gestionarReserva() {
-        if (hotel.getReservas().isEmpty()) {
+        if (hotel.getListaReservaHotel().isEmpty()) {
             JOptionPane.showMessageDialog(null, "✗ No hay reservas registradas.");
             return;
         }
@@ -158,15 +155,15 @@ public class Main {
     private static void agregarHabitacionAReserva() {
         Reserva reserva = seleccionarReserva();
         if (reserva == null) return;
-        if (hotel.getHabitaciones().isEmpty()) {
+        if (hotel.getListaHabitacionHotel().isEmpty()) {
             JOptionPane.showMessageDialog(null, "✗ No hay habitaciones registradas.");
             return;
         }
         int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número de habitación:"));
         Habitacion encontrada = null;
-        for (Habitacion h : hotel.getHabitaciones())
-            if (h.getNumero() == numero) {
-                encontrada = h;
+        for (Habitacion huesped : hotel.getListaHabitacionHotel())
+            if (huesped.getNumero() == numero) {
+                encontrada = huesped;
                 break;
             }
         if (encontrada == null) {
@@ -183,15 +180,15 @@ public class Main {
     private static void agregarServicioAReserva() {
         Reserva reserva = seleccionarReserva();
         if (reserva == null) return;
-        if (hotel.getServiciosAdicionales().isEmpty()) {
+        if (reserva.getListaServiciAdicional().isEmpty()) {
             JOptionPane.showMessageDialog(null, "✗ No hay servicios registrados.");
             return;
         }
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el código del servicio:\n\n" + obtenerListaServicios()));
         ServicioAdicional encontrado = null;
-        for (ServicioAdicional s : hotel.getServiciosAdicionales())
-            if (s.getCodigo() == codigo) {
-                encontrado = s;
+        for (ServicioAdicional adicional : reserva.getListaServiciAdicional())
+            if (adicional.getCodigo() == codigo) {
+                encontrado = adicional;
                 break;
             }
         if (encontrado == null) {
@@ -263,12 +260,14 @@ public class Main {
      * Solicita los atributos requeridos y registra un nuevo servicio adicional en el hotel.
      */
     private static void registrarServicio() {
+        Reserva reserva = seleccionarReserva();
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el código del servicio:"));
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del servicio:");
         String descripcion = JOptionPane.showInputDialog(null, "Ingrese la descripción del servicio:");
         double precio = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el precio del servicio:"));
         ServicioAdicional servicio = new ServicioAdicional(codigo, nombre, precio, descripcion, true);
-        hotel.getServiciosAdicionales().add(servicio);
+        assert reserva != null;
+        reserva.getListaServiciAdicional().add(servicio);
         JOptionPane.showMessageDialog(null, "✓ Servicio '" + nombre + "' registrado exitosamente.");
     }
 
@@ -289,7 +288,7 @@ public class Main {
      */
     private static Reserva seleccionarReserva() {
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, obtenerListaReservas() + "\nIngrese el código de la reserva:"));
-        for (Reserva r : hotel.getReservas()) if (r.getCodigoReserva() == codigo) return r;
+        for (Reserva reserva : hotel.getListaReservaHotel()) if (reserva.getCodigoReserva() == codigo) return reserva;
         JOptionPane.showMessageDialog(null, "✗ Reserva no encontrada.");
         return null;
     }
@@ -301,8 +300,8 @@ public class Main {
      */
     private static String obtenerListaReservas() {
         StringBuilder lista = new StringBuilder("RESERVAS REGISTRADAS\n====================\n");
-        for (Reserva r : hotel.getReservas())
-            lista.append("Código: ").append(r.getCodigoReserva()).append(" | Estado: ").append(r.getEstado()).append("\n");
+        for (Reserva reserva : hotel.getListaReservaHotel())
+            lista.append("Código: ").append(reserva.getCodigoReserva()).append(" | Estado: ").append(reserva.getEstado()).append("\n");
         return lista.toString();
     }
 
@@ -313,7 +312,7 @@ public class Main {
      */
     private static String obtenerListaHuespedes() {
         StringBuilder lista = new StringBuilder("HUÉSPEDES REGISTRADOS\n=====================\n");
-        for (Huesped h : hotel.getHuespedes()) lista.append("- ").append(h.getTelefono()).append("\n");
+        for (Huesped huesped : hotel.getListaHuespedHotel()) lista.append("- ").append(huesped.getTelefono()).append("\n");
         return lista.toString();
     }
 
@@ -323,9 +322,11 @@ public class Main {
      * @return Cadena formateada para su visualización.
      */
     private static String obtenerListaServicios() {
+        Reserva reserva = seleccionarReserva();
         StringBuilder lista = new StringBuilder("SERVICIOS REGISTRADOS\n=====================\n");
-        for (ServicioAdicional s : hotel.getServiciosAdicionales())
-            lista.append("Código: ").append(s.getCodigo()).append(" | ").append(s.getNombre()).append("\n");
+        assert reserva != null;
+        for (ServicioAdicional adicional : reserva.getListaServiciAdicional())
+            lista.append("Código: ").append(adicional.getCodigo()).append(" | ").append(adicional.getNombre()).append("\n");
         return lista.toString();
     }
 }
