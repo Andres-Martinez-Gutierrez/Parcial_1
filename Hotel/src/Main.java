@@ -23,7 +23,7 @@ public class Main {
         int opcionPrincipal = 0;
         while (opcionPrincipal != 8) {
             try {
-                String entrada = opcionesMenu();
+                String entrada = opcionesMenuPrincipal();
                 if (entrada == null){
                     break;
                 }
@@ -48,7 +48,7 @@ public class Main {
      *
      * @return Cadena con la opción elegida por el usuario o null si se cancela la ventana.
      */
-    private static String opcionesMenu() {
+    private static String opcionesMenuPrincipal() {
         return JOptionPane.showInputDialog(null, """
                 ========== MENÚ PRINCIPAL ==========
                 1. Registrar huésped
@@ -161,9 +161,9 @@ public class Main {
         }
         int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número de habitación:"));
         Habitacion encontrada = null;
-        for (Habitacion h : hotel.getHabitaciones())
-            if (h.getNumero() == numero) {
-                encontrada = h;
+        for (Habitacion huesped : hotel.getHabitaciones())
+            if (huesped.getNumero() == numero) {
+                encontrada = huesped;
                 break;
             }
         if (encontrada == null) {
@@ -186,9 +186,9 @@ public class Main {
         }
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el código del servicio:\n\n" + obtenerListaServicios()));
         ServicioAdicional encontrado = null;
-        for (ServicioAdicional s : hotel.getServiciosAdicionales())
-            if (s.getCodigo() == codigo) {
-                encontrado = s;
+        for (ServicioAdicional adicional : hotel.getServiciosAdicionales())
+            if (adicional.getCodigo() == codigo) {
+                encontrado = adicional;
                 break;
             }
         if (encontrado == null) {
@@ -286,7 +286,7 @@ public class Main {
      */
     private static Reserva seleccionarReserva() {
         int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, obtenerListaReservas() + "\nIngrese el código de la reserva:"));
-        for (Reserva r : hotel.getReservas()) if (r.getCodigoReserva() == codigo) return r;
+        for (Reserva reserva : hotel.getReservas()) if (reserva.getCodigoReserva() == codigo) return reserva;
         JOptionPane.showMessageDialog(null, "✗ Reserva no encontrada.");
         return null;
     }
@@ -298,8 +298,8 @@ public class Main {
      */
     private static String obtenerListaReservas() {
         StringBuilder lista = new StringBuilder("RESERVAS REGISTRADAS\n====================\n");
-        for (Reserva r : hotel.getReservas())
-            lista.append("Código: ").append(r.getCodigoReserva()).append(" | Estado: ").append(r.getEstado()).append("\n");
+        for (Reserva reserva : hotel.getReservas())
+            lista.append("Código: ").append(reserva.getCodigoReserva()).append(" | Estado: ").append(reserva.getEstado()).append("\n");
         return lista.toString();
     }
 
@@ -310,7 +310,7 @@ public class Main {
      */
     private static String obtenerListaHuespedes() {
         StringBuilder lista = new StringBuilder("HUÉSPEDES REGISTRADOS\n=====================\n");
-        for (Huesped h : hotel.getHuespedes()) lista.append("- ").append(h.getTelefono()).append("\n");
+        for (Huesped huesped : hotel.getHuespedes()) lista.append("- ").append(huesped.getTelefono()).append("\n");
         return lista.toString();
     }
 
@@ -321,8 +321,8 @@ public class Main {
      */
     private static String obtenerListaServicios() {
         StringBuilder lista = new StringBuilder("SERVICIOS REGISTRADOS\n=====================\n");
-        for (ServicioAdicional s : hotel.getServiciosAdicionales())
-            lista.append("Código: ").append(s.getCodigo()).append(" | ").append(s.getNombre()).append("\n");
+        for (ServicioAdicional adicional : hotel.getServiciosAdicionales())
+            lista.append("Código: ").append(adicional.getCodigo()).append(" | ").append(adicional.getNombre()).append("\n");
         return lista.toString();
     }
 }
