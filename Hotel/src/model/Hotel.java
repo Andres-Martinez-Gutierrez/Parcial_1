@@ -76,10 +76,24 @@ public class Hotel {
         return suma == numero;
     }
 
+    /**
+     * Registra un nuevo huésped en el sistema del hotel.
+     * Obtiene la lista de huéspedes registrada en el hotel y añade
+     * el objeto huésped recibido como parámetro.
+     *
+     * @param huesped objeto de tipo Huesped que se desea registrar
+     */
     public void registrarHuesped(Huesped huesped) {
         getListaHuespedHotel().add(huesped);
     }
 
+    /**
+     * Registra una nueva habitación en el inventario del hotel.
+     * Obtiene la lista de habitaciones registrada en el hotel y añade
+     * el objeto habitación recibido como parámetro.
+     *
+     * @param habitacion objeto de tipo Habitacion que se desea registrar
+     */
     public void registrarhabitacion(Habitacion habitacion) {
         getListaHabitacionHotel().add(habitacion);
     }
