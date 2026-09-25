@@ -44,7 +44,7 @@ public class Hotel {
      * @return el huésped encontrado o null si no existe
      */
     public Huesped buscarHuespedPorTelefono(int telefono) {
-        for (Huesped huesped : huespedes) {
+        for (Huesped huesped : listaHuespedHotel) {
             if (huesped.getTelefono() == telefono) {
                 return huesped;
             }
@@ -77,11 +77,11 @@ public class Hotel {
     }
 
     public void registrarHuesped(Huesped huesped) {
-        getHuespedes().add(huesped);
+        getListaHuespedHotel().add(huesped);
     }
 
     public void registrarhabitacion(Habitacion habitacion) {
-        getHabitaciones().add(habitacion);
+        getListaHabitacionHotel().add(habitacion);
     }
 
     /**
