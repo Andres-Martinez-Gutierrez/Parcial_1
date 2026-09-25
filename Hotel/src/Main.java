@@ -27,7 +27,7 @@ public class Main {
         while (opcionPrincipal != 8) {
             try {
                 String entrada = opcionesMenu();
-                if (entrada == null){
+                if (entrada == null) {
                     break;
                 }
                 opcionPrincipal = Integer.parseInt(entrada);
@@ -70,13 +70,13 @@ public class Main {
     private static void registrarHuesped() {
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre completo del huésped:");
         String documento = JOptionPane.showInputDialog(null, "Ingrese el documento de identidad:");
-        String telefono = JOptionPane.showInputDialog(null, "Ingrese el teléfono:");
+        int telefono =  Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el teléfono:"));
         String correo = JOptionPane.showInputDialog(null, "Ingrese el correo electrónico:");
         String pais = JOptionPane.showInputDialog(null, "Ingrese el país de procedencia:");
-        if (nombre == null || documento == null || telefono == null || correo == null || pais == null) return;
+        if (nombre == null || documento == null || telefono == 0 || correo == null || pais == null) return;
 
         Huesped huesped = new Huesped(nombre, documento, telefono, correo, pais);
-        hotel.getHuespedes().add(huesped);
+        hotel.registrarHuesped(huesped);
         JOptionPane.showMessageDialog(null, "✓ Huésped " + nombre + " registrado exitosamente.");
     }
 
@@ -84,8 +84,8 @@ public class Main {
      * Solicita un número de teléfono y busca la información del huésped registrado asociado.
      */
     private static void buscarHuesped() {
-        String telefono = JOptionPane.showInputDialog(null, "Ingrese el número de teléfono del huésped:");
-        if (telefono == null || telefono.isEmpty()) return;
+        int telefono =  Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número de teléfono del huésped:"));
+        if (!hotel.esNumeroPerfecto(telefono)) return;
         Huesped huesped = hotel.buscarHuespedPorTelefono(telefono);
         if (huesped != null) JOptionPane.showMessageDialog(null, "✓ Huésped encontrado:\n\n" + huesped);
         else JOptionPane.showMessageDialog(null, "✗ No existe un huésped con el teléfono: " + telefono);
@@ -113,7 +113,7 @@ public class Main {
             return;
         }
 
-        String telefono = JOptionPane.showInputDialog(null, "Ingrese el teléfono del huésped que realiza la reserva:\n\n" + obtenerListaHuespedes());
+        int telefono =  Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el teléfono del huésped que realiza la reserva:\n\n" + obtenerListaHuespedes()));
         Huesped huesped = hotel.buscarHuespedPorTelefono(telefono);
         if (huesped == null) {
             JOptionPane.showMessageDialog(null, "✗ No se encontró el huésped.");
@@ -255,7 +255,7 @@ public class Main {
         int capacidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la capacidad máxima:"));
         double precio = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el precio por noche:"));
         Habitacion habitacion = new Habitacion(numero, piso, tipo, capacidad, precio, "Disponible");
-        hotel.getHabitaciones().add(habitacion);
+        hotel.registrarhabitacion(habitacion);
         JOptionPane.showMessageDialog(null, "✓ Habitación " + numero + " registrada exitosamente.");
     }
 

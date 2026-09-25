@@ -45,9 +45,9 @@ public class Hotel {
      * @param telefono número de teléfono que se desea buscar
      * @return el huésped encontrado o null si no existe
      */
-    public Huesped buscarHuespedPorTelefono(String telefono) {
+    public Huesped buscarHuespedPorTelefono(int telefono) {
         for (Huesped huesped : huespedes) {
-            if (huesped.getTelefono().equals(telefono)) {
+            if (huesped.getTelefono() == telefono) {
                 return huesped;
             }
         }
@@ -76,6 +76,14 @@ public class Hotel {
         }
 
         return suma == numero;
+    }
+
+    public void registrarHuesped(Huesped huesped) {
+        getHuespedes().add(huesped);
+    }
+
+    public void registrarhabitacion(Habitacion habitacion) {
+        getHabitaciones().add(habitacion);
     }
 
     /**
