@@ -11,7 +11,7 @@ public class Huesped {
     private String paisProcedencia;
 
     // Relación: un huésped puede tener múltiples reservas
-    private List<Reserva> reservas;
+    private List<Reserva> listaHuespedReserva;
 
     /**
      * Constructor de la clase Huesped
@@ -25,7 +25,7 @@ public class Huesped {
         this.nombreCompleto = nombreCompleto;
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
-        this.reservas = new ArrayList<>();
+        this.listaHuespedReserva = new ArrayList<>();
         this.paisProcedencia = paisProcedencia;
         this.correoElectronico = correoElectronico;
     }
@@ -54,12 +54,12 @@ public class Huesped {
         this.telefono = telefono;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
+    public List<Reserva> getListaHuespedReserva() {
+        return listaHuespedReserva;
     }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
+    public void setListaHuespedReserva(List<Reserva> listaHuespedReserva) {
+        this.listaHuespedReserva = listaHuespedReserva;
     }
 
     public String getCorreoElectronico() {
@@ -86,7 +86,7 @@ public class Huesped {
                 ", telefono='" + telefono + '\'' +
                 ", correoElectronico='" + correoElectronico + '\'' +
                 ", paisProcedencia='" + paisProcedencia + '\'' +
-                ", reservas=" + reservas +
+                ", reservas=" + listaHuespedReserva +
                 '}';
     }
 }

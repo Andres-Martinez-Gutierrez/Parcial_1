@@ -19,10 +19,10 @@ public class Reserva {
     private Huesped huesped;
 
     // Una reserva puede incluir una o más habitaciones
-    private List<Habitacion> habitaciones;
+    private List<Habitacion> listaHabitacionReserva;
 
     // Servicios utilizados durante la estadía
-    private List<ServicioAdicional> serviciosAdicionales;
+    private List<ServicioAdicional> listaServiciAdicional;
 
     /**
      * Constructor de la clase Reserva.
@@ -46,8 +46,8 @@ public class Reserva {
         this.metodoPago = metodoPago;
         this.valorTotal = valorTotal;
         this.huesped = huesped;
-        this.habitaciones = new ArrayList<>();
-        this.serviciosAdicionales = new ArrayList<>();
+        this.listaHabitacionReserva = new ArrayList<>();
+        this.listaServiciAdicional = new ArrayList<>();
     }
 
     public int getCodigoReserva() { return codigoReserva; }
@@ -66,10 +66,10 @@ public class Reserva {
     public void setValorTotal(Double valorTotal) { this.valorTotal = valorTotal; }
     public Huesped getHuesped() { return huesped; }
     public void setHuesped(Huesped huesped) { this.huesped = huesped; }
-    public List<Habitacion> getHabitaciones() { return habitaciones; }
-    public void setHabitaciones(List<Habitacion> habitaciones) { this.habitaciones = habitaciones; }
-    public List<ServicioAdicional> getServiciosAdicionales() { return serviciosAdicionales; }
-    public void setServiciosAdicionales(List<ServicioAdicional> serviciosUtilizados) { this.serviciosAdicionales = serviciosUtilizados; }
+    public List<Habitacion> getListaHabitacionReserva() { return listaHabitacionReserva; }
+    public void setListaHabitacionReserva(List<Habitacion> listaHabitacionReserva) { this.listaHabitacionReserva = listaHabitacionReserva; }
+    public List<ServicioAdicional> getListaServiciAdicional() { return listaServiciAdicional; }
+    public void setListaServiciAdicional(List<ServicioAdicional> serviciosUtilizados) { this.listaServiciAdicional = serviciosUtilizados; }
 
     /**
      * Calcula el valor total de la reserva.
@@ -89,12 +89,12 @@ public class Reserva {
         }
 
         double totalHabitaciones = 0;
-        for (Habitacion habitacion : habitaciones) {
+        for (Habitacion habitacion : listaHabitacionReserva) {
             totalHabitaciones += habitacion.getPrecioPorNoche() * noches;
         }
 
         double totalServicios = 0;
-        for (ServicioAdicional servicio : serviciosAdicionales) {
+        for (ServicioAdicional servicio : listaServiciAdicional) {
             totalServicios += servicio.getPrecio();
         }
 
@@ -111,9 +111,9 @@ public class Reserva {
     public boolean agregarHabitacion(Habitacion habitacion) {
         if (habitacion == null) return false;
         if (!habitacion.getEstado().equalsIgnoreCase("Disponible")) return false;
-        if (habitaciones.contains(habitacion)) return false;
+        if (listaHabitacionReserva.contains(habitacion)) return false;
 
-        habitaciones.add(habitacion);
+        listaHabitacionReserva.add(habitacion);
         return true;
     }
 
@@ -127,7 +127,7 @@ public class Reserva {
         if (servicio == null) return false;
         if (!servicio.isDisponible()) return false;
 
-        serviciosAdicionales.add(servicio);
+        listaServiciAdicional.add(servicio);
         return true;
     }
 
@@ -163,8 +163,8 @@ public class Reserva {
                 ", metodoPago='" + metodoPago + '\'' +
                 ", valorTotal=" + valorTotal +
                 ", huesped=" + huesped +
-                ", habitaciones=" + habitaciones +
-                ", serviciosAdicionales=" + serviciosAdicionales +
+                ", habitaciones=" + listaHabitacionReserva +
+                ", serviciosAdicionales=" + listaServiciAdicional +
                 '}';
     }
 }
